@@ -1,0 +1,166 @@
+.contact-main {
+    display: flex;
+    padding: 50px 44px 150px 44px;
+    justify-content: space-between;
+}
+
+.contact-main-left {
+    text-align: start;
+    width: 50%;
+}
+
+.contact-main-left-title {
+    font-weight: 500;
+    font-size: 66px;
+    color: rgba(63, 80, 230, 0.67);
+    margin: 0px
+}
+
+.contact-main-left-text {
+    font-weight: 300;
+}
+
+.contact-main-left-email {
+    font-weight: 300;
+}
+
+.contact-main-left-number {
+    margin-top: 3px;
+    margin-bottom: 0px;
+    font-weight: 300;
+}
+
+.contact-main-left-email {
+    text-decoration: underline;
+    cursor: pointer;
+    color: black;
+}
+
+.contact-main-left-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.contact-main-left-form-name {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-main-left-form-block {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    gap: 10px;
+}
+
+.contact-main-left-form label {
+    font-weight: 300;
+}
+
+.contact-main-left-form span {
+    color: #2d2d2a;
+    font-size: 15px;
+    opacity: 0.7;
+}
+
+.contact-main-left-form input {
+    background-color: #EDD286;
+    border: 1px solid;
+    border-radius: 30px;
+    height: 35px;
+    padding-left: 15px;
+    font-weight: 300;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.contact-main-left-form input:hover {
+    background-color: #ecd79b;
+}
+
+.contact-main-left-form input:focus {
+    background-color: #ecd79b;
+}
+
+.contact-main-left-form textarea {
+    background-color: #EDD286;
+    border: 1px solid;
+    border-radius: 20px;
+    height: 85px;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-weight: 300;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.contact-main-left-form textarea:hover {
+    background-color: #ecd79b;
+}
+
+.contact-main-left-form textarea:focus {
+    background-color: #ecd79b;
+}
+
+.contact-main-left-form-button {
+    background-color: #2d2d2a;
+    color: #eae6dd;
+    border: none;
+    width: 30%;
+    padding: 20px 32px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.contact-main-left-form-button:hover {
+    background-color: #373734;
+}
+
+.contact-main-right {
+    background-color: blueviolet;
+    height: 650px;
+    width: 40%;
+}
+
+@media (min-width: 1440px) {
+    .contact-main-left-title {
+        font-size: 88px;
+    }
+
+    .contact-main-left-text {
+        font-size: 24px;
+    }
+    
+    .contact-main-left-email {
+        font-size: 24px;
+    }
+    
+    .contact-main-left-number {
+        font-size: 24px;
+    }
+
+    .contact-main-left-form label {
+        font-size: 24px;
+    }
+
+    .contact-main-left-form span {
+        font-size: 20px;
+    }
+
+    .contact-main-left-form input {
+        height: 50px;
+        font-size: 24px;
+    }
+
+    .contact-main-left-form textarea {
+        height: 150px;
+        font-size: 24px;
+    }
+
+    .contact-main-left-form-button {
+        width: 40%;
+        font-size: 24px;
+    }
+}

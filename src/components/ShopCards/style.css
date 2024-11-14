@@ -1,0 +1,38 @@
+.shop-card-image {
+  width: 100%;
+  height: 330px;
+}
+
+.shop-card-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.shop-card-title {
+  font-weight: 700;
+  font-size: 28px;
+  color: black;
+}
+
+.shop-card-title:hover {
+  color: blue;
+}
+
+.shop-card-price {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.shop-card a {
+  text-decoration: none;
+}
+
+@media (min-width: 1440px) {
+  .shop-card-title {
+    font-size: 36px;
+  }
+
+  .shop-card-price {
+    font-size: 24px;
+  }
+}

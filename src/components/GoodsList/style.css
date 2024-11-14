@@ -1,0 +1,16 @@
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.goods {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding-left: 15px;
+    font-size: 20px;
+}
+
+.goods:hover {
+    background-color: rgb(210, 203, 203);
+}

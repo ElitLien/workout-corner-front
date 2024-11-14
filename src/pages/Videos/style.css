@@ -1,0 +1,6 @@
+.videos-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+  padding: 50px 44px 150px 44px;
+}

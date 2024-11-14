@@ -1,0 +1,80 @@
+.navbar {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #edd286;
+}
+
+.navbar img {
+  width: 100px;
+}
+
+.navbar-pages {
+  font-size: 15px;
+  display: flex;
+  gap: 30px;
+  color: rgba(63, 80, 230, 0.67);
+}
+
+.navbar-pages a,
+.navbar-pages div {
+  color: rgba(63, 80, 230, 0.67);
+  text-decoration: none;
+}
+
+.navbar-input {
+  background-color: #98fb98;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+input::placeholder {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: #000;
+}
+
+.navbar-inp {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.navbar-list {
+  position: absolute;
+  top: 55px;
+  background-color: white;
+  width: 100%;
+}
+
+@media (min-width: 1440px) {
+  .navbar {
+    padding: 30px;
+  }
+
+  .navbar img {
+    width: 170px;
+    height: 100%;
+  }
+
+  .navbar-pages {
+    font-size: 25px;
+  }
+
+  .navbar-input {
+    display: flex;
+    width: 200px;
+    height: 35px;
+    font-size: 25px;
+  }
+
+  input::placeholder {
+    font-size: 25px;
+  }
+}

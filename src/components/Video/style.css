@@ -1,0 +1,34 @@
+.videos-main-video {
+  width: 100%;
+  height: 200px;
+}
+
+.videos-main-video-player {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.videos-main-video-player iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.videos-main-video-player-time {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  opacity: 0.7;
+  font-size: 18px;
+  width: 50px;
+  text-align: center;
+}
+
+.videos-main-video-title {
+  text-align: center;
+  font-size: 24px;
+}

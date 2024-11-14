@@ -1,0 +1,44 @@
+.shop-main {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 44px 150px 44px;
+    gap: 40px;
+}
+
+.shop-main-left h1 {
+    font-weight: 400;
+    font-size: 32px;    
+}
+
+.shop-left-container-sort {
+    font-weight: 400;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.shop-left-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #98fb98;
+    padding: 24px 33px;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.shop-main-right {
+    width: 100%;
+}
+
+.shop-right-cards {
+    display: grid;
+    flex-direction: column; 
+    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 1440px) {
+    .shop-right-cards {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
