@@ -5,6 +5,9 @@
   justify-content: space-between;
   align-items: center;
   background-color: #edd286;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .navbar img {
@@ -20,6 +23,8 @@
 
 .navbar-pages a,
 .navbar-pages div {
+  display: flex;
+  flex-direction: column;
   color: rgba(63, 80, 230, 0.67);
   text-decoration: none;
 }
@@ -30,6 +35,22 @@
   border-radius: 20px;
   padding: 7px 16px;
   font-family: "Nunito Sans", sans-serif;
+  position: relative;
+}
+
+.navbar-clear {
+  position: absolute;
+  right: 5%;
+  top: 16%;
+  font-size: 25px;
+  text-align: center;
+  width: 35px;
+  cursor: pointer;
+}
+
+.navbar-clear:hover {
+  background-color: rgb(28, 127, 21);
+  border-radius: 25px;
 }
 
 input::placeholder {
@@ -51,6 +72,17 @@ input::placeholder {
   top: 55px;
   background-color: white;
   width: 100%;
+  border-radius: 20px;
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
+}
+
+.line {
+  background-color: rgba(63, 80, 230, 0.67);
+  width: 100%;
+  border: none;
+  height: 2px;
+  margin: 0px;
 }
 
 @media (min-width: 1440px) {

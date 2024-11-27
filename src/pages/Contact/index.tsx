@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import "./style.css";
@@ -10,6 +10,21 @@ import Modal from "../../components/Modal";
 const Contact = () => {
   const [result, setResult] = useState<string>("");
   const [contactModal, setContactModal] = useState<boolean>(false);
+  const [showArrow, setShowArrow] = useState<boolean>(false);
+
+  const checkScrollHeight = () => {
+    setShowArrow(window.scrollY > 100);
+  };
+
+  useEffect(() => {
+    checkScrollHeight();
+
+    window.addEventListener("scroll", checkScrollHeight);
+
+    return () => {
+      window.removeEventListener("scroll", checkScrollHeight);
+    };
+  }, []);
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -90,6 +105,18 @@ const Contact = () => {
           <div className="contact-main-right"></div>
         </div>
         <Footer />
+        {showArrow && (
+          <div className="arrow-container">
+            <div
+              className="arrow-up"
+              onClick={() =>
+                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+              }
+            >
+              ▲
+            </div>
+          </div>
+        )}
       </div>
       {contactModal && (
         <Modal contactModal={contactModal} setContactModal={setContactModal} />

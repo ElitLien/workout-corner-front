@@ -1,6 +1,23 @@
+.videos {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .videos-main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 50px;
   padding: 50px 44px 150px 44px;
+  flex: 1;
+}
+
+.videos-empty {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  color: rgba(63, 80, 230, 0.67);
+  font-size: 40px;
+  flex: 1;
 }

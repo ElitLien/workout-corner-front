@@ -19,6 +19,21 @@ const Cart = () => {
   const context = useContext(ModalContext);
   const { modal } = context;
   const updateStorage = useSetStorageItem();
+  const [showArrow, setShowArrow] = useState<boolean>(false);
+
+  const checkScrollHeight = () => {
+    setShowArrow(window.scrollY > 150);
+  };
+
+  useEffect(() => {
+    checkScrollHeight();
+
+    window.addEventListener("scroll", checkScrollHeight);
+
+    return () => {
+      window.removeEventListener("scroll", checkScrollHeight);
+    };
+  }, []);
 
   const calculateTotal = (items: any[]) => {
     const newTotal =
@@ -119,7 +134,26 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {document.documentElement.scrollHeight >
+      document.documentElement.clientHeight ? (
+        <Footer />
+      ) : (
+        <footer style={{ marginTop: "auto" }}>
+          <Footer />
+        </footer>
+      )}
+      {showArrow && (
+        <div className="arrow-container">
+          <div
+            className="arrow-up"
+            onClick={() =>
+              window.scroll({ top: 0, left: 0, behavior: "smooth" })
+            }
+          >
+            ▲
+          </div>
+        </div>
+      )}
       {buyModal && <Modal buyModal={buyModal} setBuyModal={setBuyModal} />}
       {modal && <AccountModal />}
     </div>

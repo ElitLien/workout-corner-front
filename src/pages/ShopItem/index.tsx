@@ -62,6 +62,21 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
   const location = useLocation();
   const updateStorage = useSetStorageItem();
   const navigate = useNavigate();
+  const [showArrow, setShowArrow] = useState<boolean>(false);
+
+  const checkScrollHeight = () => {
+    setShowArrow(window.scrollY > 150);
+  };
+
+  useEffect(() => {
+    checkScrollHeight();
+
+    window.addEventListener("scroll", checkScrollHeight);
+
+    return () => {
+      window.removeEventListener("scroll", checkScrollHeight);
+    };
+  }, []);
 
   const fetchData = (title: string) => {
     return cardsInfo.find((item) => {
@@ -181,6 +196,18 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
           </div>
         </div>
         <Footer />
+        {showArrow && (
+          <div className="arrow-container">
+            <div
+              className="arrow-up"
+              onClick={() =>
+                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+              }
+            >
+              ▲
+            </div>
+          </div>
+        )}
       </div>
       {modal && <AccountModal />}
     </>

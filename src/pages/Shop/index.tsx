@@ -2,19 +2,36 @@ import "./style.css";
 import Footer from "../../components/Footer";
 import ShopCards from "../../components/ShopCards";
 import { IShop } from "../../interface/shop.interface";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ModalContext } from "../../App";
 import AccountModal from "../../components/AccountModal";
 import Navbar from "../../components/Navbar";
+import { cardsInfo } from "../../const/cardsInfo";
 
 const Shop: React.FC<IShop> = ({ setShopTitle }) => {
   const context = useContext(ModalContext);
+  const [filteredGoods, setFilteredGoods] = useState(cardsInfo);
   const { modal } = context;
+  const [showArrow, setShowArrow] = useState<boolean>(false);
+
+  const checkScrollHeight = () => {
+    setShowArrow(window.scrollY > 150);
+  };
+
+  useEffect(() => {
+    checkScrollHeight();
+
+    window.addEventListener("scroll", checkScrollHeight);
+
+    return () => {
+      window.removeEventListener("scroll", checkScrollHeight);
+    };
+  }, []);
 
   return (
     <>
       <div className="shop">
-        <Navbar />
+        <Navbar setFilteredGoods={setFilteredGoods} />
         <div className="shop-main">
           <div className="shop-main-left">
             <h1>Catalog</h1>
@@ -34,11 +51,33 @@ const Shop: React.FC<IShop> = ({ setShopTitle }) => {
           </div>
           <div className="shop-main-right">
             <div className="shop-right-cards">
-              <ShopCards setShopTitle={setShopTitle} />
+              <ShopCards
+                setShopTitle={setShopTitle}
+                filteredGoods={filteredGoods}
+              />
             </div>
           </div>
         </div>
-        <Footer />
+        {document.documentElement.scrollHeight >
+        document.documentElement.clientHeight ? (
+          <Footer />
+        ) : (
+          <footer style={{ marginTop: "auto" }}>
+            <Footer />
+          </footer>
+        )}
+        {showArrow && (
+          <div className="arrow-container">
+            <div
+              className="arrow-up"
+              onClick={() =>
+                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+              }
+            >
+              ▲
+            </div>
+          </div>
+        )}
       </div>
       {modal && <AccountModal />}
     </>

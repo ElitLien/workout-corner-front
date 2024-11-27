@@ -1,88 +1,88 @@
-.homepage {
-    overflow-y: hidden;
-}
+/* .homepage {
+  overflow-y: hidden;
+} */
 
 .homepage-hero {
-    text-align: center;
-    margin-bottom: 146px;
+  text-align: center;
+  margin-bottom: 146px;
 }
 
 .homepage-hero img {
-    width: 92.5%;
+  width: 92.5%;
 }
 
 .homepage-hero-title {
-    margin: 28px 0px;
-    font-weight: 700;
-    font-size: 40px;
-    color: rgba(63, 80, 230, 0.67);
+  margin: 28px 0px;
+  font-weight: 700;
+  font-size: 40px;
+  color: rgba(63, 80, 230, 0.67);
 }
 
 .homepage-about {
-    text-align: center;
-    margin-bottom: 146px;
+  text-align: center;
+  margin-bottom: 146px;
 }
 
 .homepage-about-title {
-    margin-top: 0;
-    margin-bottom: 24px;
-    font-weight: 500;
-    color: rgba(63, 80, 230, 0.67);
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-weight: 500;
+  color: rgba(63, 80, 230, 0.67);
 }
 
 .homepage-about-sections {
-    display: flex;
-    justify-content: space-around;
-    margin: 0px 15px;
+  display: flex;
+  justify-content: space-around;
+  margin: 0px 15px;
 }
 
 .homepage-about-section {
-    width: calc((100% / 3) - (50px * 2) / 3);
+  width: calc((100% / 3) - (50px * 2) / 3);
 }
 
 .homepage-about-section svg {
-    width: 100%
+  width: 100%;
 }
 
 .homepage-about-section h2 {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .homepage-about-section p {
-    font-weight: 300;
-    font-size: 12px;
+  font-weight: 300;
+  font-size: 12px;
 }
 
 .homepage-services {
-    margin-bottom: 146px;
+  margin-bottom: 146px;
 }
 
 .homepage-services-title {
-    margin-top: 0;
-    margin-bottom: 80px;
-    font-weight: 500;
-    color: rgba(63, 80, 230, 0.67);
-    text-align: center;
+  margin-top: 0;
+  margin-bottom: 80px;
+  font-weight: 500;
+  color: rgba(63, 80, 230, 0.67);
+  text-align: center;
 }
 
 @media (min-width: 1440px) {
-    .homepage-hero-title {
-        font-size: 60px;
-    }
+  .homepage-hero-title {
+    font-size: 60px;
+  }
 
-    .homepage-about-title {
-        font-size: 54px;
-    }
+  .homepage-about-title {
+    font-size: 54px;
+  }
 
-    .homepage-about-section h2 {
-        font-size: 36px;
-    }
+  .homepage-about-section h2 {
+    font-size: 36px;
+  }
 
-    .homepage-about-section p {
-        font-size: 24px;
-    }
+  .homepage-about-section p {
+    font-size: 24px;
+  }
 
-    .homepage-services-title {
-        font-size: 54px;
-    }
+  .homepage-services-title {
+    font-size: 54px;
+  }
 }

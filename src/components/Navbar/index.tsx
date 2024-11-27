@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./style.css";
 import GoodsList from "../GoodsList";
@@ -18,9 +18,26 @@ interface FilterVideos {
       }[]
     >
   >;
+  setFilteredGoods?: React.Dispatch<
+    React.SetStateAction<
+      {
+        id: number;
+        title: string;
+        price: number;
+        image: string;
+        images: {
+          id: number;
+          url: string;
+        }[];
+      }[]
+    >
+  >;
 }
 
-const Navbar: React.FC<FilterVideos> = ({ setFilteredVideos }) => {
+const Navbar: React.FC<FilterVideos> = ({
+  setFilteredVideos,
+  setFilteredGoods,
+}) => {
   const logo =
     "https://workout-corner.s3.eu-north-1.amazonaws.com/homepage/Frame.png";
   const context = useContext(ModalContext);
@@ -34,6 +51,9 @@ const Navbar: React.FC<FilterVideos> = ({ setFilteredVideos }) => {
   const [count, setCount] = useState<number>(totalItems);
   const location = useLocation();
   const [enableInput, setEnableInput] = useState<boolean>(false);
+  const [focusHander, setFocusHandler] = useState<boolean>(false);
+  const timeoutIDRef = useRef<NodeJS.Timeout | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const searchResult = () => {
     let result =
@@ -70,23 +90,101 @@ const Navbar: React.FC<FilterVideos> = ({ setFilteredVideos }) => {
   };
 
   const keyUpEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const results = videos.filter((video) =>
-      video.title.toLowerCase().includes(inputValue)
-    );
+    let results:
+      | {
+          id: number;
+          title: string;
+          time: string;
+          src: string;
+        }[]
+      | {
+          id: number;
+          title: string;
+          price: number;
+          image: string;
+          images: {
+            id: number;
+            url: string;
+          }[];
+        }[] = [];
 
-    switch (event.key) {
-      case "Enter":
-        console.log("Without timeout");
-        setFilteredVideos && setFilteredVideos(results);
-        setEnableInput(false);
-        event.currentTarget.blur();
-        break;
-      default:
-        setTimeout(() => {
-          console.log("setTimeout: ");
-          setFilteredVideos && setFilteredVideos(results);
-        }, 10000);
-        break;
+    if (location.pathname === "/videos") {
+      results = videos.filter((video) =>
+        video.title.toLowerCase().includes(inputValue)
+      );
+    } else if (location.pathname === "/shop") {
+      results = cardsInfo.filter((item) =>
+        item.title.toLowerCase().includes(inputValue)
+      );
+    }
+
+    if (event.key === "Enter") {
+      console.log("Without timeout");
+
+      if (location.pathname === "/videos") {
+        setFilteredVideos &&
+          setFilteredVideos(
+            results as {
+              id: number;
+              title: string;
+              time: string;
+              src: string;
+            }[]
+          );
+      } else if (location.pathname === "/shop") {
+        setFilteredGoods &&
+          setFilteredGoods(
+            results as {
+              id: number;
+              title: string;
+              price: number;
+              image: string;
+              images: {
+                id: number;
+                url: string;
+              }[];
+            }[]
+          );
+      }
+
+      setEnableInput(false);
+      inputRef.current?.blur();
+      if (timeoutIDRef.current) {
+        clearTimeout(timeoutIDRef.current);
+        timeoutIDRef.current = null;
+      }
+    } else {
+      if (timeoutIDRef.current) {
+        clearTimeout(timeoutIDRef.current);
+      }
+      timeoutIDRef.current = setTimeout(() => {
+        console.log("setTimeout: ");
+        if (location.pathname === "/videos") {
+          setFilteredVideos &&
+            setFilteredVideos(
+              results as {
+                id: number;
+                title: string;
+                time: string;
+                src: string;
+              }[]
+            );
+        } else if (location.pathname === "/shop") {
+          setFilteredGoods &&
+            setFilteredGoods(
+              results as {
+                id: number;
+                title: string;
+                price: number;
+                image: string;
+                images: {
+                  id: number;
+                  url: string;
+                }[];
+              }[]
+            );
+        }
+      }, 10000);
     }
   };
 
@@ -104,7 +202,12 @@ const Navbar: React.FC<FilterVideos> = ({ setFilteredVideos }) => {
 
   return (
     <div className="navbar">
-      <Link to="/">
+      <Link
+        to="/"
+        onClick={() => {
+          window.scrollTo(0, 0);
+        }}
+      >
         <img src={logo} alt="" />
       </Link>
       {location.pathname === "/shop" || location.pathname === "/videos" ? (
@@ -116,27 +219,81 @@ const Navbar: React.FC<FilterVideos> = ({ setFilteredVideos }) => {
             value={inputValue}
             onChange={(e) => onChangeHandler(e)}
             onKeyUp={keyUpEvent}
+            onFocus={() => setFocusHandler(true)}
+            onBlur={() => setFocusHandler(false)}
+            ref={inputRef}
           />
-          <div className="navbar-list">
-            {location.pathname === "/shop" && inputValue && enableInput && (
-              <GoodsList searchResult={searchResult} />
-            )}
-            {location.pathname === "/videos" && inputValue && enableInput && (
-              <VideosList videosResult={videosResult} />
-            )}
-          </div>
+          {inputValue && (
+            <div className="navbar-clear" onClick={() => setInputValue("")}>
+              X
+            </div>
+          )}
+          {focusHander && (
+            <div className="navbar-list">
+              {location.pathname === "/shop" && inputValue && enableInput && (
+                <GoodsList
+                  searchResult={searchResult}
+                  setFilteredGoods={setFilteredGoods}
+                  setFocusHandler={setFocusHandler}
+                  timeoutIDRef={timeoutIDRef}
+                  inputRef={inputRef}
+                  setInputValue={setInputValue}
+                />
+              )}
+              {location.pathname === "/videos" && inputValue && enableInput && (
+                <VideosList
+                  videosResult={videosResult}
+                  setFilteredVideos={setFilteredVideos}
+                  setFocusHandler={setFocusHandler}
+                  timeoutIDRef={timeoutIDRef}
+                  inputRef={inputRef}
+                  setInputValue={setInputValue}
+                />
+              )}
+            </div>
+          )}
         </div>
       ) : (
         <div></div>
       )}
       <div className="navbar-pages">
-        <Link to="/shop">Shop</Link>
-        <Link to="/videos">Videos</Link>
-        <Link to="/contact">Contact</Link>
+        <Link
+          to="/shop"
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+        >
+          Shop{location.pathname === "/shop" && <hr className="line"></hr>}
+        </Link>
+        <Link
+          to="/videos"
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+        >
+          Videos{location.pathname === "/videos" && <hr className="line"></hr>}
+        </Link>
+        <Link
+          to="/contact"
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+        >
+          Contact
+          {location.pathname === "/contact" && <hr className="line"></hr>}
+        </Link>
         <div onClick={() => switchHandler()} style={{ cursor: "pointer" }}>
           Account
         </div>
-        <Link to="/cart">Cart{`(${count})`}</Link>
+        <Link
+          to="/cart"
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+        >
+          Cart{`(${count})`}
+          {location.pathname === "/cart" && <hr className="line"></hr>}
+        </Link>
       </div>
     </div>
   );

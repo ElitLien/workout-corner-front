@@ -12,9 +12,17 @@
   font-weight: 700;
   font-size: 28px;
   color: black;
+  width: fit-content;
 }
 
 .shop-card-title:hover {
+  color: blue;
+}
+
+.shop-card-t {
+  width: fit-content;
+}
+.shop-card-t:hover {
   color: blue;
 }
 

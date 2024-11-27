@@ -1,83 +1,90 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .cart-main {
-    padding: 50px 44px 150px 44px;
-    color: rgba(63, 80, 230, 0.67);
+  padding: 50px 44px 150px 44px;
+  color: rgba(63, 80, 230, 0.67);
+  flex: 1;
 }
 
 .cart-main-title {
-    font-weight: 400;
-    font-size: 30px;
-    margin-bottom: 0;
-    margin-top: 0;
+  font-weight: 400;
+  font-size: 30px;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .cart-main-empty {
-    text-align: center;
-    font-size: 40px;
-    margin-top: 70px;
+  text-align: center;
+  font-size: 40px;
+  margin-top: 70px;
 }
 
 .cart-main-goods {
-    width: 100%;
-    height: 300px;
-    background-color: blue;
-    color: black;
+  width: 100%;
+  height: 300px;
+  background-color: blue;
+  color: black;
 }
 
 .cart-main-count-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 48px;
 }
 
 .cart-main-total {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .cart-main-count-section-total {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
 }
 
 .cart-main-total-text {
-    font-weight: 400;
-    font-size: 18px;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .cart-main-total-price {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .cart-main-button {
-    margin-top: 10px;
-    height: 60px;
-    border-radius: 30px;
-    border: none;
-    background-color: #2d2d2a;
-    color: #eae6dd;
-    font-family: "Nunito Sans", sans-serif;
-    font-size: 18px;
-    cursor: pointer;
+  margin-top: 10px;
+  height: 60px;
+  border-radius: 30px;
+  border: none;
+  background-color: #2d2d2a;
+  color: #eae6dd;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 @media (min-width: 1440px) {
-    .cart-main-title {
-        font-size: 54px;
-    }
+  .cart-main-title {
+    font-size: 54px;
+  }
 
-    .cart-main-total-text {
-        font-size: 24px;
-    }
+  .cart-main-total-text {
+    font-size: 24px;
+  }
 
-    .cart-main-total-price {
-        font-size: 24px;
-    }
+  .cart-main-total-price {
+    font-size: 24px;
+  }
 
-    .cart-main-button {
-        height: 70px;
-        font-size: 24px;
-    }
+  .cart-main-button {
+    height: 70px;
+    font-size: 24px;
+  }
 }
