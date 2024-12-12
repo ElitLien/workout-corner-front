@@ -7,12 +7,17 @@ import { ModalContext } from "../../App";
 import AccountModal from "../../components/AccountModal";
 import Navbar from "../../components/Navbar";
 import { cardsInfo } from "../../const/cardsInfo";
+import { IDbStorage } from "../../interface/dbStorage.interface";
+import axios from "axios";
 
-const Shop: React.FC<IShop> = ({ setShopTitle }) => {
+const Shop: React.FC<IShop> = ({ setShopId }) => {
   const context = useContext(ModalContext);
   const [filteredGoods, setFilteredGoods] = useState(cardsInfo);
   const { modal } = context;
   const [showArrow, setShowArrow] = useState<boolean>(false);
+  const [dbFilteredGoods, setDbFilteredGoods] = useState<
+    IDbStorage[] | undefined
+  >();
 
   const checkScrollHeight = () => {
     setShowArrow(window.scrollY > 150);
@@ -28,10 +33,16 @@ const Shop: React.FC<IShop> = ({ setShopTitle }) => {
     };
   }, []);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/products/all")
+      .then((res) => setDbFilteredGoods(res.data));
+  }, []);
+
   return (
     <>
       <div className="shop">
-        <Navbar setFilteredGoods={setFilteredGoods} />
+        <Navbar setDbFilteredGoods={setDbFilteredGoods} />
         <div className="shop-main">
           <div className="shop-main-left">
             <h1>Catalog</h1>
@@ -52,8 +63,8 @@ const Shop: React.FC<IShop> = ({ setShopTitle }) => {
           <div className="shop-main-right">
             <div className="shop-right-cards">
               <ShopCards
-                setShopTitle={setShopTitle}
-                filteredGoods={filteredGoods}
+                setShopId={setShopId}
+                dbFilteredGoods={dbFilteredGoods}
               />
             </div>
           </div>

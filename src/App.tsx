@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import { IContext } from "./interface/context.interface";
+import SignUp from "./pages/SignUp";
 
 export const ModalContext = React.createContext<IContext>({
   modal: false,
@@ -15,7 +16,7 @@ export const ModalContext = React.createContext<IContext>({
 });
 
 function App() {
-  const [shopTitle, setShopTitle] = useState<string>();
+  const [shopId, setShopId] = useState<number>();
   const [modal, setModal] = useState<boolean>(false);
   const [cartItem, setCartItem] = useState<{
     id: number;
@@ -39,14 +40,15 @@ function App() {
       <Router>
         <Routes>
           <Route path="" element={<Homepage />} />
-          <Route path="/shop" element={<Shop setShopTitle={setShopTitle} />} />
+          <Route path="/shop" element={<Shop setShopId={setShopId} />} />
           <Route
-            path={`/shop/:${shopTitle}`}
+            path={`/shop/:${shopId}`}
             element={<ShopItem setCartItem={setCartItem} />}
           />
           <Route path="/videos" element={<Videos />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Router>
     </ModalContext.Provider>

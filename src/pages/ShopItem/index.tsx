@@ -8,6 +8,8 @@ import { IItemContent } from "../../interface/itemContent.interface";
 import { cardsInfo } from "../../const/cardsInfo";
 import "./style.css";
 import { useSetStorageItem } from "../../hooks/useSetStorageItem";
+import axios from "axios";
+import { IDbStorage } from "../../interface/dbStorage.interface";
 
 const leftStyles: CSSProperties = {
   position: "absolute",
@@ -42,17 +44,7 @@ const arrowHover: CSSProperties = {
 };
 
 const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
-  const [amountItem, setAmountItem] = useState<number>();
-  const [itemContent, setItemContent] = useState<{
-    id: number;
-    title: string;
-    price: number;
-    image: string;
-    images: {
-      id: number;
-      url: string;
-    }[];
-  }>();
+  const [itemContent, setItemContent] = useState<IDbStorage>();
   const [isInCart, setIsInCart] = useState<boolean>(false);
   const [imageIndex, setImageIndex] = useState<number>(0);
   const [hoverLeftArrow, setHoverLeftArrow] = useState<boolean>(false);
@@ -63,12 +55,14 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
   const updateStorage = useSetStorageItem();
   const navigate = useNavigate();
   const [showArrow, setShowArrow] = useState<boolean>(false);
+  const [dbStorage, setDbStorage] = useState<any[]>();
 
   const checkScrollHeight = () => {
     setShowArrow(window.scrollY > 150);
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     checkScrollHeight();
 
     window.addEventListener("scroll", checkScrollHeight);
@@ -78,20 +72,25 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
     };
   }, []);
 
-  const fetchData = (title: string) => {
-    return cardsInfo.find((item) => {
-      return item.title === title;
-    });
+  const fetchData = async (id: number) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/products/${id}`
+      );
+      setItemContent(response.data);
+    } catch {
+      console.error("Don't fetch data!!!!!");
+    }
   };
 
   const addItemToStorage = () => {
-    if (itemContent?.id !== undefined && amountItem !== undefined) {
-      setCartItem({
-        id: itemContent?.id,
-        price: itemContent.price,
-        amount: amountItem,
-      });
-    }
+    // if (itemContent?.id !== undefined) {
+    //   setCartItem({
+    //     id: itemContent?.id,
+    //     price: itemContent.price,
+    //     amount: 1,
+    //   });
+    // }
     if (isInCart) {
       navigate("/cart");
     } else {
@@ -109,8 +108,7 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
   };
 
   useEffect(() => {
-    const data = fetchData(location.pathname.split("/")[2]);
-    setItemContent(data);
+    fetchData(+location.pathname.split("/")[2]);
   }, [location]);
 
   useEffect(() => {
@@ -121,36 +119,36 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
     setIsInCart(itemInCart);
   }, [itemContent?.id]);
 
-  const toPreviousImage = () => {
-    const firstSlide = imageIndex === 0;
-    const newIndex =
-      itemContent && firstSlide
-        ? itemContent?.images.length - 1
-        : imageIndex - 1;
-    setImageIndex(newIndex);
-  };
+  // const toPreviousImage = () => {
+  //   const firstSlide = imageIndex === 0;
+  //   const newIndex =
+  //     itemContent && firstSlide
+  //       ? itemContent?.images.length - 1
+  //       : imageIndex - 1;
+  //   setImageIndex(newIndex);
+  // };
 
-  const toNextImage = () => {
-    const lastSlide =
-      itemContent && imageIndex === itemContent?.images.length - 1;
-    const newIndex = lastSlide ? 0 : imageIndex + 1;
-    setImageIndex(newIndex);
-  };
+  // const toNextImage = () => {
+  //   const lastSlide =
+  //     itemContent && imageIndex === itemContent?.images.length - 1;
+  //   const newIndex = lastSlide ? 0 : imageIndex + 1;
+  //   setImageIndex(newIndex);
+  // };
 
-  const slideStyles: CSSProperties = {
-    width: "100%",
-    height: "100%",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundImage: `url(${itemContent?.images[imageIndex].url})`,
-  };
+  // const slideStyles: CSSProperties = {
+  //   width: "100%",
+  //   height: "100%",
+  //   backgroundPosition: "center",
+  //   backgroundSize: "cover",
+  //   backgroundImage: `url(${itemContent?.images[imageIndex].url})`,
+  // };
 
   return (
     <>
       <div className="shop-item">
         <Navbar />
         <div className="shop-item-main">
-          <div style={sliderStyles}>
+          {/* <div style={sliderStyles}>
             <div
               style={{ ...leftStyles, ...(hoverLeftArrow ? arrowHover : {}) }}
               onClick={toPreviousImage}
@@ -168,10 +166,10 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
               →
             </div>
             <div style={slideStyles}></div>
-          </div>
+          </div> */}
           <div className="shop-item-main-block">
             <div className="shop-item-info">
-              <h2 className="shop-item-info-name">{itemContent?.title}</h2>
+              <h2 className="shop-item-info-name">{itemContent?.name}</h2>
               <h3 className="shop-item-info-price">{`$${itemContent?.price}`}</h3>
             </div>
             <div className="shop-item-cart">

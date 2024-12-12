@@ -1,31 +1,19 @@
+import { IDbStorage } from "./dbStorage.interface";
+
 export interface IGoodsList {
   searchResult: () =>
     | {
         id: number;
-        title: string;
-        price: number;
+        created_at: string;
+        description: string;
         image: string;
-        images: {
-          id: number;
-          url: string;
-        }[];
+        name: string;
+        price: number;
+        category_id: number;
       }[];
-  setFilteredGoods:
-    | React.Dispatch<
-        React.SetStateAction<
-          {
-            id: number;
-            title: string;
-            price: number;
-            image: string;
-            images: {
-              id: number;
-              url: string;
-            }[];
-          }[]
-        >
-      >
-    | undefined;
+  setDbFilteredGoods?: React.Dispatch<
+    React.SetStateAction<IDbStorage[] | undefined>
+  >;
   setFocusHandler?: React.Dispatch<React.SetStateAction<boolean>>;
   timeoutIDRef?: React.MutableRefObject<NodeJS.Timeout | null>;
   inputRef?: React.RefObject<HTMLInputElement | null>;

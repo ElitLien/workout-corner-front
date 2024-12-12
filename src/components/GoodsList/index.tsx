@@ -1,29 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { cardsInfo } from "../../const/cardsInfo";
 import "./style.css";
 import { IGoodsList } from "../../interface/goodsList.interface";
 import { Link } from "react-router-dom";
+import { IDbStorage } from "../../interface/dbStorage.interface";
+import axios from "axios";
 
 const GoodsList: React.FC<IGoodsList> = ({
   searchResult,
-  setFilteredGoods,
+  setDbFilteredGoods,
   setFocusHandler,
   timeoutIDRef,
   inputRef,
   setInputValue,
 }) => {
+  const [dbStorage, setDbStorage] = useState<IDbStorage[]>();
   const clickHandler = (el: {
     id: number;
-    title: string;
-    price: number;
+    created_at: string;
+    description: string;
     image: string;
-    images: {
-      id: number;
-      url: string;
-    }[];
+    name: string;
+    price: number;
+    category_id: number;
   }) => {
-    setInputValue && setInputValue(el.title);
-    setFilteredGoods && setFilteredGoods([el]);
+    setInputValue && setInputValue(el.name);
+    setDbFilteredGoods && setDbFilteredGoods([el]);
     setFocusHandler && setFocusHandler(false);
     inputRef?.current && inputRef.current.blur();
     if (timeoutIDRef?.current) {
@@ -32,9 +34,15 @@ const GoodsList: React.FC<IGoodsList> = ({
     }
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/products/all")
+      .then((res) => setDbStorage(res.data));
+  }, []);
+
   return (
     <>
-      {cardsInfo &&
+      {dbStorage &&
         searchResult().map((el, ind) => {
           return (
             <div
@@ -43,7 +51,7 @@ const GoodsList: React.FC<IGoodsList> = ({
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => clickHandler(el)}
             >
-              {el.title}
+              {el.name}
             </div>
           );
         })}

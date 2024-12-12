@@ -1,0 +1,41 @@
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 700px;
+  width: 600px;
+  background-color: white;
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.sign-up-container-title {
+  font-size: 32px;
+  margin-bottom: 45px;
+}
+
+.sign-up-container input {
+  font-size: 28px;
+  width: 70%;
+}
+
+.sign-up-container button {
+  font-size: 28px;
+  width: 45%;
+}
+
+.sign-up-container-input-password {
+  margin-bottom: 45px;
+}
+
+.sign-up-container-return {
+  font-size: 20px;
+}
+
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+}

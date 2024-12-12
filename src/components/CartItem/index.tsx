@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./style.css";
 import { ICartItem } from "../../interface/cartItem.interface";
 import { cardsInfo } from "../../const/cardsInfo";
+import { IDbStorage } from "../../interface/dbStorage.interface";
+import axios from "axios";
 
 const CartItem: React.FC<ICartItem> = ({
   content,
@@ -9,24 +11,25 @@ const CartItem: React.FC<ICartItem> = ({
   onAddAmount,
   onRemoveAmount,
 }) => {
-  const [itemContent, setItemContent] = useState<{
-    id: number;
-    price: number;
-    title: string;
-    image: string;
-  }>();
+  const [itemContent, setItemContent] = useState<IDbStorage>();
 
   const itemTotalPrice = useMemo(() => {
     return itemContent ? itemContent.price * content.amount : 0;
   }, [itemContent, content.amount]);
 
-  const fetchData = (id: number) => {
-    return cardsInfo.find((item) => item.id === id);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/products/${content.id}`
+      );
+      setItemContent(response.data);
+    } catch {
+      console.error("Don't fetch data!!!");
+    }
   };
 
   useEffect(() => {
-    const data = fetchData(content.id);
-    setItemContent(data);
+    fetchData();
   }, [content.id]);
 
   return (
@@ -35,7 +38,7 @@ const CartItem: React.FC<ICartItem> = ({
         <div className="cart-item-first-block-image">
           <img src={itemContent?.image} alt="" />
         </div>
-        <h3 className="cart-item-first-block-title">{itemContent?.title}</h3>
+        <h3 className="cart-item-first-block-title">{itemContent?.name}</h3>
       </div>
       <div className="cart-item-second-block">
         <div className="cart-item-second-block-quintity">

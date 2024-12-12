@@ -56,6 +56,7 @@
   align-items: center;
   border-radius: 40px;
   background-color: #98fb98;
+  opacity: 0.6;
 }
 
 .arrow-container {

@@ -1,13 +1,12 @@
 export interface IShop {
-  setShopTitle: React.Dispatch<React.SetStateAction<string | undefined>>;
-  filteredGoods?: {
+  setShopId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  dbFilteredGoods?: {
     id: number;
-    title: string;
-    price: number;
+    created_at: string;
+    description: string;
     image: string;
-    images: {
-      id: number;
-      url: string;
-    }[];
+    name: string;
+    price: number;
+    category_id: number;
   }[];
 }

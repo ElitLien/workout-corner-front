@@ -9,6 +9,8 @@ import { ModalContext } from "../../App";
 import { cardsInfo } from "../../const/cardsInfo";
 import { useSetStorageItem } from "../../hooks/useSetStorageItem";
 import Modal from "../../components/Modal";
+import axios from "axios";
+import { IDbStorage } from "../../interface/dbStorage.interface";
 
 const Cart = () => {
   const storage = localStorage.getItem("itemContent");
@@ -20,6 +22,7 @@ const Cart = () => {
   const { modal } = context;
   const updateStorage = useSetStorageItem();
   const [showArrow, setShowArrow] = useState<boolean>(false);
+  const [dbStorage, setDbStorage] = useState<IDbStorage[]>();
 
   const checkScrollHeight = () => {
     setShowArrow(window.scrollY > 150);
@@ -39,7 +42,7 @@ const Cart = () => {
     const newTotal =
       items &&
       items.reduce((acc, item) => {
-        const card = cardsInfo.find((info) => info.id === item.id);
+        const card = dbStorage && dbStorage.find((info) => info.id === item.id);
         return card ? acc + card.price * item.amount : acc;
       }, 0);
     setTotal(newTotal);
@@ -68,6 +71,17 @@ const Cart = () => {
     updateStorage(anotherArray);
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/products/all"
+      );
+      setDbStorage(response.data);
+    } catch {
+      console.error("Don't fetch data!!!");
+    }
+  };
+
   const successPurchase = () => {
     updateStorage([]);
     setBuyModal(true);
@@ -90,12 +104,12 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
-    calculateTotal(items);
-  }, [items]);
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    console.log("items: ", items);
-  }, [items]);
+    dbStorage && calculateTotal(items);
+  }, [items, dbStorage]);
 
   return (
     <div className="cart">

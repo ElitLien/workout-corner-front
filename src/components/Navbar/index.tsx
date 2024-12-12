@@ -6,6 +6,8 @@ import { ModalContext } from "../../App";
 import { cardsInfo } from "../../const/cardsInfo";
 import { videos } from "../../const/videos";
 import VideosList from "../VideosList";
+import axios from "axios";
+import { IDbStorage } from "../../interface/dbStorage.interface";
 
 interface FilterVideos {
   setFilteredVideos?: React.Dispatch<
@@ -18,25 +20,14 @@ interface FilterVideos {
       }[]
     >
   >;
-  setFilteredGoods?: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-        title: string;
-        price: number;
-        image: string;
-        images: {
-          id: number;
-          url: string;
-        }[];
-      }[]
-    >
+  setDbFilteredGoods?: React.Dispatch<
+    React.SetStateAction<IDbStorage[] | undefined>
   >;
 }
 
 const Navbar: React.FC<FilterVideos> = ({
   setFilteredVideos,
-  setFilteredGoods,
+  setDbFilteredGoods,
 }) => {
   const logo =
     "https://workout-corner.s3.eu-north-1.amazonaws.com/homepage/Frame.png";
@@ -52,14 +43,15 @@ const Navbar: React.FC<FilterVideos> = ({
   const location = useLocation();
   const [enableInput, setEnableInput] = useState<boolean>(false);
   const [focusHander, setFocusHandler] = useState<boolean>(false);
+  const [dbStorage, setDbStorage] = useState<IDbStorage[]>();
   const timeoutIDRef = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const searchResult = () => {
     let result =
-      cardsInfo &&
-      cardsInfo.filter((item) =>
-        item.title.toLowerCase().includes(inputValue.toLowerCase())
+      dbStorage &&
+      dbStorage.filter((item) =>
+        item.name.toLowerCase().includes(inputValue.toLowerCase())
       );
     return result ? result.slice(0, 3) : [];
   };
@@ -99,22 +91,21 @@ const Navbar: React.FC<FilterVideos> = ({
         }[]
       | {
           id: number;
-          title: string;
-          price: number;
+          created_at: string;
+          description: string;
           image: string;
-          images: {
-            id: number;
-            url: string;
-          }[];
+          name: string;
+          price: number;
+          category_id: number;
         }[] = [];
 
     if (location.pathname === "/videos") {
       results = videos.filter((video) =>
         video.title.toLowerCase().includes(inputValue)
       );
-    } else if (location.pathname === "/shop") {
-      results = cardsInfo.filter((item) =>
-        item.title.toLowerCase().includes(inputValue)
+    } else if (location.pathname === "/shop" && dbStorage) {
+      results = dbStorage.filter((item) =>
+        item.name.toLowerCase().includes(inputValue)
       );
     }
 
@@ -132,17 +123,16 @@ const Navbar: React.FC<FilterVideos> = ({
             }[]
           );
       } else if (location.pathname === "/shop") {
-        setFilteredGoods &&
-          setFilteredGoods(
+        setDbFilteredGoods &&
+          setDbFilteredGoods(
             results as {
               id: number;
-              title: string;
-              price: number;
+              created_at: string;
+              description: string;
               image: string;
-              images: {
-                id: number;
-                url: string;
-              }[];
+              name: string;
+              price: number;
+              category_id: number;
             }[]
           );
       }
@@ -170,17 +160,16 @@ const Navbar: React.FC<FilterVideos> = ({
               }[]
             );
         } else if (location.pathname === "/shop") {
-          setFilteredGoods &&
-            setFilteredGoods(
+          setDbFilteredGoods &&
+            setDbFilteredGoods(
               results as {
                 id: number;
-                title: string;
-                price: number;
+                created_at: string;
+                description: string;
                 image: string;
-                images: {
-                  id: number;
-                  url: string;
-                }[];
+                name: string;
+                price: number;
+                category_id: number;
               }[]
             );
         }
@@ -197,8 +186,10 @@ const Navbar: React.FC<FilterVideos> = ({
   }, []);
 
   useEffect(() => {
-    console.log("Search: ", count);
-  }, [count]);
+    axios
+      .get("http://localhost:8080/api/products/all")
+      .then((res) => setDbStorage(res.data));
+  }, []);
 
   return (
     <div className="navbar">
@@ -233,7 +224,7 @@ const Navbar: React.FC<FilterVideos> = ({
               {location.pathname === "/shop" && inputValue && enableInput && (
                 <GoodsList
                   searchResult={searchResult}
-                  setFilteredGoods={setFilteredGoods}
+                  setDbFilteredGoods={setDbFilteredGoods}
                   setFocusHandler={setFocusHandler}
                   timeoutIDRef={timeoutIDRef}
                   inputRef={inputRef}
