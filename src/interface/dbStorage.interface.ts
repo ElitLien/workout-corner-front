@@ -1,9 +1,9 @@
 export interface IDbStorage {
   id: number;
-  created_at: string;
+  createdAt: string;
   description: string;
   image: string;
   name: string;
   price: number;
-  category_id: number;
+  categoryId: number;
 }

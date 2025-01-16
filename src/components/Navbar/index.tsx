@@ -91,12 +91,12 @@ const Navbar: React.FC<FilterVideos> = ({
         }[]
       | {
           id: number;
-          created_at: string;
+          createdAt: string;
           description: string;
           image: string;
           name: string;
           price: number;
-          category_id: number;
+          categoryId: number;
         }[] = [];
 
     if (location.pathname === "/videos") {
@@ -127,12 +127,12 @@ const Navbar: React.FC<FilterVideos> = ({
           setDbFilteredGoods(
             results as {
               id: number;
-              created_at: string;
+              createdAt: string;
               description: string;
               image: string;
               name: string;
               price: number;
-              category_id: number;
+              categoryId: number;
             }[]
           );
       }
@@ -164,12 +164,12 @@ const Navbar: React.FC<FilterVideos> = ({
             setDbFilteredGoods(
               results as {
                 id: number;
-                created_at: string;
+                createdAt: string;
                 description: string;
                 image: string;
                 name: string;
                 price: number;
-                category_id: number;
+                categoryId: number;
               }[]
             );
         }
@@ -274,7 +274,7 @@ const Navbar: React.FC<FilterVideos> = ({
           {location.pathname === "/contact" && <hr className="line"></hr>}
         </Link>
         <div onClick={() => switchHandler()} style={{ cursor: "pointer" }}>
-          Account
+          {localStorage.getItem("authToken") ? "Signed" : "Account"}
         </div>
         <Link
           to="/cart"

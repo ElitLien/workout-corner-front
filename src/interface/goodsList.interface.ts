@@ -4,12 +4,12 @@ export interface IGoodsList {
   searchResult: () =>
     | {
         id: number;
-        created_at: string;
+        createdAt: string;
         description: string;
         image: string;
         name: string;
         price: number;
-        category_id: number;
+        categoryId: number;
       }[];
   setDbFilteredGoods?: React.Dispatch<
     React.SetStateAction<IDbStorage[] | undefined>

@@ -14,14 +14,27 @@
 }
 
 .shop-main-left h1 {
+  margin-top: 0;
   font-weight: 400;
   font-size: 32px;
 }
 
 .shop-left-container-sort {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 20px;
   white-space: nowrap;
+  cursor: pointer;
+  width: fit-content;
+}
+.shop-left-container-sort:hover {
+  color: rgb(78, 78, 78);
+}
+
+.shop-left-container-price {
+  font-weight: 400;
+  font-size: 20px;
+  white-space: nowrap;
+  width: fit-content;
 }
 
 .shop-left-container {
@@ -32,6 +45,66 @@
   padding: 24px 33px;
   border-radius: 20px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  width: 300px;
+}
+
+.slider {
+  margin-top: 12px;
+  width: 100%;
+  height: 2px;
+  background-color: #cdd9ed;
+}
+
+.slider .thumb {
+  width: 23px;
+  height: 23px;
+  cursor: grab;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #275efe;
+  top: -10px;
+}
+
+.shop-left-container-sort-price {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.shop-left-container-sort-price input {
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.shop-left-container-sort-price input[type="number"]::-webkit-inner-spin-button,
+.shop-left-container-sort-price
+  input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.shop-left-container-sort-min-price {
+  border: 1px blue solid;
+  border-radius: 10px;
+}
+
+.shop-left-container-sort-max-price {
+  border: 1px blue solid;
+  border-radius: 10px;
+}
+.shop-left-container-sort-min-price:hover {
+  border: 1px rgb(95, 95, 251) solid;
+}
+
+.shop-left-container-sort-max-price:hover {
+  border: 1px rgb(95, 95, 251) solid;
+}
+
+.track-1 {
+  background-color: #275efe;
 }
 
 .shop-main-right {

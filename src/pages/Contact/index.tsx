@@ -5,7 +5,7 @@ import "./style.css";
 import { useContext } from "react";
 import { ModalContext } from "../../App";
 import AccountModal from "../../components/AccountModal";
-import Modal from "../../components/Modal";
+import Modal from "../../components/BuyModal";
 
 const Contact = () => {
   const [result, setResult] = useState<string>("");

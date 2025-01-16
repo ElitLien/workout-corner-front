@@ -36,7 +36,7 @@ const CartItem: React.FC<ICartItem> = ({
     <div className="cart-item">
       <div className="cart-item-first-block">
         <div className="cart-item-first-block-image">
-          <img src={itemContent?.image} alt="" />
+          <img src={`data:image/jpeg;base64,${itemContent?.image}`} alt="" />
         </div>
         <h3 className="cart-item-first-block-title">{itemContent?.name}</h3>
       </div>

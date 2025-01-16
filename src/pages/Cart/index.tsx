@@ -6,11 +6,10 @@ import Footer from "../../components/Footer";
 import AccountModal from "../../components/AccountModal";
 import CartItem from "../../components/CartItem";
 import { ModalContext } from "../../App";
-import { cardsInfo } from "../../const/cardsInfo";
 import { useSetStorageItem } from "../../hooks/useSetStorageItem";
-import Modal from "../../components/Modal";
 import axios from "axios";
 import { IDbStorage } from "../../interface/dbStorage.interface";
+import BuyModal from "../../components/BuyModal";
 
 const Cart = () => {
   const storage = localStorage.getItem("itemContent");
@@ -168,7 +167,7 @@ const Cart = () => {
           </div>
         </div>
       )}
-      {buyModal && <Modal buyModal={buyModal} setBuyModal={setBuyModal} />}
+      {buyModal && <BuyModal buyModal={buyModal} setBuyModal={setBuyModal} />}
       {modal && <AccountModal />}
     </div>
   );

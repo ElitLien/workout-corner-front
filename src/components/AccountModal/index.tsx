@@ -9,7 +9,8 @@ const AccountModal = () => {
   const { modal, switchHandler } = context;
   const [username, setUsername] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const [token, setToken] = useState<string>();
+  const [token, setToken] = useState<any>();
+  const [decodeToken, setDecodeToken] = useState<any>();
 
   useEffect(() => {
     if (modal) {
@@ -33,15 +34,51 @@ const AccountModal = () => {
       username: username,
       password: password,
     };
+
     axios
-      .post("http://localhost:8080/api/v1/auth/authenticate", userObj, {
+      .post("http://localhost:8080/api/auth/authenticate", userObj, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
-        console.log("User created:", response.data);
-        setToken(response.data.token);
+        window.alert("The user is logged in!");
+        const receivedToken = response.data.token;
+        setToken(receivedToken);
+        localStorage.setItem("authToken", receivedToken);
+
+        return axios.get("http://localhost:8080/api/profile", {
+          headers: {
+            Accept: "*/*",
+            Authorization: `Bearer ${receivedToken}`,
+          },
+        });
+      })
+      .then((response) => {
+        setDecodeToken(response.data);
+        console.log("Decoded Token Data: ", response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error.response || error.message);
+      });
+  };
+
+  const logoutHandler = () => {
+    axios
+      .post(
+        "http://localhost:8080/api/auth/logout",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(() => {
+        window.alert("See you later User!");
+        setToken(null);
+        setDecodeToken(null);
+        localStorage.removeItem("authToken");
       })
       .catch((error) => {
         console.error("Error:", error.response || error.message);
@@ -49,10 +86,8 @@ const AccountModal = () => {
   };
 
   useEffect(() => {
-    if (token) {
-      localStorage.setItem("authToken", JSON.stringify(token));
-    }
-  }, [token]);
+    console.log("decode Token: ", decodeToken);
+  }, []);
 
   return (
     <div className="account-modal">
@@ -80,6 +115,12 @@ const AccountModal = () => {
           onClick={buttonHandler}
         >
           Sign in
+        </button>
+        <button
+          className="account-modal-content-button"
+          onClick={logoutHandler}
+        >
+          Logout
         </button>
         <div className="account-modal-content-footer">
           <div className="account-modal-content-footer-element">

@@ -3,7 +3,7 @@ import "./style.css";
 import { IBuyModal } from "../../interface/buyModal.interface";
 import { useLocation } from "react-router-dom";
 
-const Modal: React.FC<IBuyModal> = ({
+const BuyModal: React.FC<IBuyModal> = ({
   buyModal,
   setBuyModal,
   contactModal,
@@ -54,4 +54,4 @@ const Modal: React.FC<IBuyModal> = ({
   );
 };
 
-export default Modal;
+export default BuyModal;

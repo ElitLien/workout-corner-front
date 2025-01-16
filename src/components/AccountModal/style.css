@@ -46,6 +46,13 @@ body.active-modal {
   margin-top: 0;
 }
 
+.account-modal-content-text {
+  font-size: 30px;
+  font-weight: 400;
+  color: #3e3e3e;
+  margin: auto 0;
+}
+
 .account-modal-content-inputs {
   display: flex;
   flex-direction: column;
