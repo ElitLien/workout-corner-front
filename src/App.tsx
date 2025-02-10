@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Shop from "./pages/Shop";
 import Videos from "./pages/Videos";
 import ShopItem from "./pages/ShopItem";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import { IContext } from "./interface/context.interface";
 import SignUp from "./pages/SignUp";
+import Users from "./pages/Users";
 
 export const ModalContext = React.createContext<IContext>({
   modal: false,
@@ -23,6 +24,9 @@ function App() {
     price: number;
     amount: number;
   }>();
+  const tokenStorage = localStorage.getItem("decodeTokenData");
+  const parseToken = tokenStorage && JSON.parse(tokenStorage);
+  const [decodeToken, setDecodeToken] = useState<any>(parseToken);
 
   const switchHandler = () => {
     setModal((prev) => !prev);
@@ -34,6 +38,11 @@ function App() {
       console.log(cartItem);
     }
   }, [cartItem]);
+
+  useEffect(() => {
+    const localToken = localStorage.getItem("decodeTokenData");
+    localToken && setDecodeToken(JSON.parse(localToken));
+  }, []);
 
   return (
     <ModalContext.Provider value={{ modal, switchHandler }}>
@@ -47,6 +56,9 @@ function App() {
           />
           <Route path="/videos" element={<Videos />} />
           <Route path="/contact" element={<Contact />} />
+          {decodeToken?.role === "ADMIN" && (
+            <Route path="/users" element={<Users />} />
+          )}
           <Route path="/cart" element={<Cart />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>

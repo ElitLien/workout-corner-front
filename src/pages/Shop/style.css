@@ -63,6 +63,7 @@
   border-radius: 50%;
   border: 2px solid #275efe;
   top: -10px;
+  z-index: -1;
 }
 
 .shop-left-container-sort-price {

@@ -1,0 +1,243 @@
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.add-modal {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 2;
+}
+
+.add-modal-overlay {
+  background: rgba(49, 49, 49, 0.8);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.add-modal-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background-color: aqua;
+  padding: 40px 50px;
+  border-radius: 3px;
+  height: 600px;
+  max-width: 800px;
+  min-width: 500px;
+  text-align: center;
+}
+
+.add-modal-content-title {
+  font-size: 20px;
+  font-weight: 400;
+  color: #3e3e3e;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.add-modal-content-main-label {
+  font-size: 28px;
+}
+
+.add-modal-content-main {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  margin-bottom: 20px;
+  padding: 20px 30px;
+  border: 1px black solid;
+  border-radius: 20px;
+  background-color: blueviolet;
+}
+
+.add-modal-content-text {
+  font-size: 30px;
+  font-weight: 400;
+  color: #3e3e3e;
+  margin: auto 0;
+}
+
+.add-modal-content-main-description-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.add-modal-content-main-form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 20px;
+  padding: 40px 30px;
+  border: 1px black solid;
+  border-radius: 20px;
+  gap: 16px;
+  background-color: azure;
+}
+
+.add-modal-content-button {
+  width: 100%;
+}
+
+.add-modal-content-main-close {
+  position: absolute;
+  font-size: 28px;
+  top: 25px;
+  right: 30px;
+}
+
+.add-modal-content-main-close:hover {
+  color: red;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  font-size: 24px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.add-modal-content-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.add-modal-content-input {
+  height: 25px;
+  border: none;
+  border-bottom: 1px rgb(118, 118, 118) solid;
+  padding: 8px 6px;
+}
+
+.add-modal-content-main-name {
+  height: 32px;
+}
+
+.add-modal-content-input:focus {
+  background-color: #f7f7f7;
+}
+
+.add-modal-content-button-add {
+  width: 50%;
+  margin-bottom: 18px;
+  height: 35px;
+  border: none;
+  background-color: beige;
+  /* font-weight: 600; */
+  color: #3e3e3e;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.add-modal-content-input::placeholder {
+  color: rgb(118, 118, 118);
+}
+
+.add-modal-content-footer {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  gap: 15px;
+  margin-top: 10px;
+  color: #3e3e3e;
+}
+
+.add-modal-content-footer-element-yes {
+  cursor: pointer;
+  width: 80px;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+.add-modal-content-footer-element-no {
+  cursor: pointer;
+  width: 100px;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+#select-categories {
+  width: 100%;
+}
+
+.add-modal-content-main {
+  gap: 16px;
+}
+
+.add-modal-content-main input::placeholder {
+  color: #6d6d6d;
+}
+
+.add-modal-content-main label {
+  font-size: 20px;
+}
+
+.add-modal-content-main input {
+  height: 20px;
+}
+
+.add-modal-content-footer-element-yes:hover {
+  background-color: greenyellow;
+}
+
+.add-modal-content-footer-element-no:hover {
+  background-color: red;
+}
+a {
+  color: #3e3e3e;
+}
+
+@media (min-width: 1440px) {
+  .add-modal-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    min-width: 500px;
+    height: 600px;
+    justify-content: space-between;
+  }
+
+  .add-modal-content-main input {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 24px;
+    height: 32px;
+  }
+
+  .add-modal-content-title {
+    font-size: 28px;
+  }
+
+  .add-modal-content-inputs {
+    gap: 20px;
+  }
+
+  .add-modal-content-input {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 24px;
+  }
+
+  .add-modal-content-button {
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .add-modal-content-footer {
+    font-size: 20px;
+  }
+}

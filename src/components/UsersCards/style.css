@@ -1,0 +1,47 @@
+.users-cards-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+  height: 80px;
+  text-align: center;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid black;
+  padding-left: 20px;
+  background-color: antiquewhite;
+}
+
+.users-cards-body-first-block {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  gap: 30px;
+}
+
+.users-cards-body-second-block {
+  width: 400px;
+}
+
+.users-cards-body-third-block {
+  width: 200px;
+}
+
+.users-cards-body-apply {
+  height: 36px;
+  font-size: 20px;
+  background-color: rgb(226, 222, 159);
+  width: 100px;
+  border-radius: 20px;
+  border: none;
+}
+
+.users-cards-body-apply:hover {
+  background-color: rgb(142, 171, 91);
+}
+
+.select-role {
+  width: 128px;
+  height: 36px;
+  font-size: 16px;
+}

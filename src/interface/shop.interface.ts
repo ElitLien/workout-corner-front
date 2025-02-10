@@ -9,4 +9,6 @@ export interface IShop {
     price: number;
     categoryId: number;
   }[];
+  decodeToken?: any;
+  setDecodeToken?: React.Dispatch<any>;
 }

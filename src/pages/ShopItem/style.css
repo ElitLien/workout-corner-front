@@ -79,6 +79,116 @@
   justify-content: space-between;
 }
 
+.shop-item-reviews-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  margin-top: 32px;
+  background-color: rgb(248, 240, 240);
+  height: 350px;
+  width: 45%;
+  margin-bottom: 32px;
+}
+
+.shop-item-reviews-title {
+  font-size: 24px;
+}
+
+.shop-item-reviews-apply {
+  font-size: 20px;
+  border: none;
+  width: 175px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #fe8585;
+}
+
+.shop-item-reviews-apply:hover {
+  border: 3px solid white;
+  cursor: pointer;
+}
+
+.shop-item-reviews-show {
+  margin-top: 32px;
+  width: 100%;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.shop-item-reviews-show-unit {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  opacity: 0.5;
+}
+
+.shop-item-reviews-edit-rating {
+  width: 100px;
+  border: none;
+  border-radius: 20px;
+  padding-left: 10px;
+  background-color: rgb(218, 157, 157);
+  height: 30px;
+  font-size: 20px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+#shop-item-reviews-edit-text {
+  height: 100px;
+  border: none;
+  border-radius: 20px;
+  padding-left: 10px;
+  background-color: rgb(218, 157, 157);
+  font-size: 20px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.shop-item-reviews-edit-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.shop-item-reviews-edit-buttons-create {
+  width: 150px;
+  height: 40px;
+  border: none;
+  background-color: #d1b6b6;
+  border-radius: 20px;
+  font-size: 20px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.shop-item-reviews-edit-buttons-create:hover {
+  border: 3px solid white;
+  cursor: pointer;
+}
+
+.shop-item-reviews-edit-buttons-close {
+  width: 150px;
+  height: 40px;
+  border: none;
+  background-color: #d1b6b6;
+  border-radius: 20px;
+  font-size: 20px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.shop-item-reviews-edit-buttons-close:hover {
+  border: 3px solid white;
+  cursor: pointer;
+}
+
 .shop-item-characteristics-title {
   font-weight: 400;
   font-size: 24px;
@@ -90,6 +200,8 @@
   background-color: rgba(255, 69, 0, 0.5);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
 }
 
 .shop-item-tabs {

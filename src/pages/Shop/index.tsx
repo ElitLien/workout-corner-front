@@ -10,6 +10,7 @@ import { IDbStorage } from "../../interface/dbStorage.interface";
 import axios from "axios";
 import ReactSlider from "react-slider";
 import { useSearchParams } from "react-router-dom";
+import AddModal from "../../components/AddModal";
 
 const MIN = 1;
 const MAX = 10000;
@@ -40,6 +41,10 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
   );
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortData, setSortData] = useState<string>();
+  const tokenStorage = localStorage.getItem("decodeTokenData");
+  const parseToken = tokenStorage && JSON.parse(tokenStorage);
+  const [decodeToken, setDecodeToken] = useState<any>(parseToken);
+  const [activeAddModal, setActiveAddModal] = useState<boolean>(false);
 
   const checkScrollHeight = () => {
     setShowArrow(window.scrollY > 150);
@@ -92,22 +97,6 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
     setSearchParams({});
   };
 
-  const setNewestGoods = async () => {
-    const newArr: IDbStorage[] = JSON.parse(JSON.stringify(dbFilteredGoods));
-    let filteredGoods = newArr?.sort((a, b) => {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
-    setDbFilteredGoods(filteredGoods);
-  };
-
-  const setOldestGoods = () => {
-    const newArr: IDbStorage[] = JSON.parse(JSON.stringify(dbFilteredGoods));
-    let filteredGoods = newArr?.sort((a, b) => {
-      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-    });
-    setDbFilteredGoods(filteredGoods);
-  };
-
   const catchCategories = async () => {
     try {
       const res = await axios.get("http://localhost:8080/api/categories/all");
@@ -128,6 +117,8 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
       setLoading(false);
     }
   };
+
+  const addGoods = () => {};
 
   useEffect(() => {
     checkScrollHeight();
@@ -170,6 +161,8 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
 
   useEffect(() => {
     catchCategories();
+    const localToken = localStorage.getItem("decodeTokenData");
+    localToken && setDecodeToken(JSON.parse(localToken));
   }, []);
 
   return (
@@ -302,6 +295,17 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
               >
                 Reset filters
               </button>
+              {decodeToken?.role === "MODERATOR" ||
+              decodeToken?.role === "ADMIN" ? (
+                <button
+                  className="shop-left-container-sort-price-button"
+                  onClick={() => setActiveAddModal((prev) => !prev)}
+                >
+                  Add goods
+                </button>
+              ) : (
+                <div></div>
+              )}
             </div>
           </div>
           <div className="shop-main-right">
@@ -310,6 +314,7 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
                 <ShopCards
                   setShopId={setShopId}
                   dbFilteredGoods={dbFilteredGoods}
+                  decodeToken={decodeToken}
                 />
               )}
             </div>
@@ -337,6 +342,7 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
         )}
       </div>
       {modal && <AccountModal />}
+      {activeAddModal && <AddModal setActiveAddModal={setActiveAddModal} />}
     </>
   );
 };

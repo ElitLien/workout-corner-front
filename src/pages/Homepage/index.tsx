@@ -5,6 +5,11 @@ import Footer from "../../components/Footer";
 import { useContext, useEffect, useState } from "react";
 import { ModalContext } from "../../App";
 import AccountModal from "../../components/AccountModal";
+import thumbsUp from "../../images/thumbs-up.png";
+import basketball from "../../images/basketball.png";
+import exercise from "../../images/exercise.png";
+import hero_img2 from "../../images/hero_img2.png";
+import hero_img3 from "../../images/hero_img3.svg";
 
 const Homepage = () => {
   const hero_img =
@@ -32,28 +37,38 @@ const Homepage = () => {
       <div className="homepage">
         <Navbar />
         <div className="homepage-hero">
-          <h1 className="homepage-hero-title">Welcome to the WorkoutCorner</h1>
-          <img src={hero_img} alt="" />
+          <h1 className="homepage-hero-title">
+            <div>Welcome</div> <div>to</div> <div>the</div>{" "}
+            <div>WorkoutCorner</div>
+          </h1>
+          <img src={hero_img2} alt="" />
         </div>
         <div className="homepage-about">
           <h1 className="homepage-about-title">About us</h1>
           <div className="homepage-about-sections">
             <div className="homepage-about-section">
-              <svg
-                width="273"
-                height="244"
-                viewBox="0 0 273 244"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse
-                  cx="136.312"
-                  cy="122"
-                  rx="136.312"
-                  ry="122"
-                  fill="#D9D9D9"
+              <div className="homepage-about-section-image-block">
+                <svg
+                  width="273"
+                  height="244"
+                  viewBox="0 0 273 244"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <ellipse
+                    cx="136.312"
+                    cy="122"
+                    rx="136.312"
+                    ry="122"
+                    fill="#e6a495"
+                  />
+                </svg>
+                <img
+                  className="homepage-about-section-image"
+                  src={exercise}
+                  alt=""
                 />
-              </svg>
+              </div>
               <h2>History</h2>
               <p>
                 WorkoutCorner was born as a result of our passion for sports and
@@ -65,21 +80,28 @@ const Homepage = () => {
               </p>
             </div>
             <div className="homepage-about-section">
-              <svg
-                width="273"
-                height="244"
-                viewBox="0 0 273 244"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse
-                  cx="136.312"
-                  cy="122"
-                  rx="136.312"
-                  ry="122"
-                  fill="#D9D9D9"
+              <div className="homepage-about-section-image-block">
+                <svg
+                  width="273"
+                  height="244"
+                  viewBox="0 0 273 244"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <ellipse
+                    cx="136.312"
+                    cy="122"
+                    rx="136.312"
+                    ry="122"
+                    fill="#03fc84"
+                  />
+                </svg>
+                <img
+                  className="homepage-about-section-image"
+                  src={thumbsUp}
+                  alt=""
                 />
-              </svg>
+              </div>
               <h2>Advantages</h2>
               <p>
                 We are proud to offer more than just products, but a
@@ -91,21 +113,28 @@ const Homepage = () => {
               </p>
             </div>
             <div className="homepage-about-section">
-              <svg
-                width="273"
-                height="244"
-                viewBox="0 0 273 244"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse
-                  cx="136.312"
-                  cy="122"
-                  rx="136.312"
-                  ry="122"
-                  fill="#D9D9D9"
+              <div className="homepage-about-section-image-block">
+                <svg
+                  width="273"
+                  height="244"
+                  viewBox="0 0 273 244"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <ellipse
+                    cx="136.312"
+                    cy="122"
+                    rx="136.312"
+                    ry="122"
+                    fill="#fcd303"
+                  />
+                </svg>
+                <img
+                  className="homepage-about-section-image"
+                  src={basketball}
+                  alt=""
                 />
-              </svg>
+              </div>
               <h2>Values</h2>
               <p>
                 We strive to provide quality, innovation, and support for a

@@ -43,19 +43,34 @@ const arrowHover: CSSProperties = {
   color: "#33FF33",
 };
 
-const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
+const ShopItem: React.FC<IItemContent> = () => {
   const [itemContent, setItemContent] = useState<IDbStorage>();
   const [isInCart, setIsInCart] = useState<boolean>(false);
   const [imageIndex, setImageIndex] = useState<number>(0);
   const [hoverLeftArrow, setHoverLeftArrow] = useState<boolean>(false);
   const [hoverRightArrow, setHoverRightArrow] = useState<boolean>(false);
   const context = useContext(ModalContext);
-  const { modal } = context;
+  const { modal, switchHandler } = context;
   const location = useLocation();
   const updateStorage = useSetStorageItem();
   const navigate = useNavigate();
   const [showArrow, setShowArrow] = useState<boolean>(false);
-  const [dbStorage, setDbStorage] = useState<any[]>();
+  const [reviewWindow, setReviewWindow] = useState<boolean>(false);
+  const [reviewRating, setReviewRating] = useState<number>();
+  const [reviewText, setReviewText] = useState<string>();
+  const tokenStorage = localStorage.getItem("authToken");
+  const [token, setToken] = useState<string | null>(tokenStorage);
+  const [userId, setUserId] = useState<number>();
+  const [dbReviews, setDbReviews] = useState<
+    {
+      id: number;
+      userId: number;
+      productId: number;
+      rating: number;
+      text: string;
+      createdAt: string;
+    }[]
+  >();
 
   const checkScrollHeight = () => {
     setShowArrow(window.scrollY > 150);
@@ -84,13 +99,6 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
   };
 
   const addItemToStorage = () => {
-    // if (itemContent?.id !== undefined) {
-    //   setCartItem({
-    //     id: itemContent?.id,
-    //     price: itemContent.price,
-    //     amount: 1,
-    //   });
-    // }
     if (isInCart) {
       navigate("/cart");
     } else {
@@ -107,6 +115,56 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
     }
   };
 
+  const createReview = () => {
+    try {
+      axios.post(
+        "http://localhost:8080/api/reviews/create",
+        {
+          userId: userId,
+          productId: +location.pathname.split("/")[2],
+          rating: reviewRating,
+          text: reviewText,
+        },
+        {
+          headers: {
+            Accept: "*/*",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      window.alert("Review was created!!!");
+    } catch (er) {
+      console.error("Don't create review: ", er);
+    }
+  };
+
+  const loadReviews = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/api/reviews/all", {
+        headers: {
+          Accept: "*/*",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const productReview = res.data.filter(
+        (el: {
+          id: number;
+          userId: number;
+          productId: number;
+          rating: number;
+          text: string;
+          createdAt: string;
+        }) => {
+          if (el.productId === +location.pathname.split("/")[2]) return el;
+        }
+      );
+      console.log("productReview: ", productReview);
+      setDbReviews(productReview);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
+
   useEffect(() => {
     fetchData(+location.pathname.split("/")[2]);
   }, [location]);
@@ -118,6 +176,13 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
     );
     setIsInCart(itemInCart);
   }, [itemContent?.id]);
+
+  useEffect(() => {
+    const localId = localStorage.getItem("decodeTokenData");
+    const localIdParse = localId && JSON.parse(localId);
+    setUserId(localIdParse.userId);
+    loadReviews();
+  }, []);
 
   // const toPreviousImage = () => {
   //   const firstSlide = imageIndex === 0;
@@ -185,12 +250,76 @@ const ShopItem: React.FC<IItemContent> = ({ setCartItem }) => {
           </div>
           <div className="shop-item-characteristics">
             <h3 className="shop-item-characteristics-title">Characteristics</h3>
-            <div className="shop-item-characteristics-points"></div>
+            <div className="shop-item-characteristics-points">
+              {itemContent?.description}
+            </div>
+          </div>
+          <div className="shop-item-reviews">
+            <h3 className="shop-item-reviews-title">Reviews</h3>
+            {localStorage.getItem("authToken") ? (
+              <button
+                className="shop-item-reviews-apply"
+                onClick={() => setReviewWindow(true)}
+              >
+                Add review
+              </button>
+            ) : (
+              <>
+                <div>You must register to post a review</div>
+                <button onClick={() => switchHandler()}>Login</button>
+              </>
+            )}
+            {reviewWindow && (
+              <div className="shop-item-reviews-edit">
+                <h3>Create review</h3>
+                <div>Rating</div>
+                <input
+                  type="number"
+                  className="shop-item-reviews-edit-rating"
+                  step="0.1"
+                  min="0"
+                  max="5"
+                  onChange={(e) => setReviewRating(+e.target.value)}
+                ></input>
+                <div>Text</div>
+                <textarea
+                  name="text-review"
+                  id="shop-item-reviews-edit-text"
+                  onChange={(e) => setReviewText(e.target.value)}
+                ></textarea>
+                <div className="shop-item-reviews-edit-buttons">
+                  <button
+                    className="shop-item-reviews-edit-buttons-create"
+                    onClick={createReview}
+                  >
+                    Create
+                  </button>
+                  <button
+                    className="shop-item-reviews-edit-buttons-close"
+                    onClick={() => setReviewWindow(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
+            <div className="shop-item-reviews-show">
+              {dbReviews &&
+                dbReviews.map((el, ind) => {
+                  return (
+                    <div className="shop-item-reviews-show-unit">
+                      <div>{el.createdAt}</div>
+                      <div>{el.rating}</div>
+                      <div>{el.text}</div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
           <div className="shop-item-tabs">
             <Link to="/shop">Shop</Link>
             {">"}
-            <p className="shop-item-tabs-current">Product Name</p>
+            <p className="shop-item-tabs-current">{itemContent?.name}</p>
           </div>
         </div>
         <Footer />

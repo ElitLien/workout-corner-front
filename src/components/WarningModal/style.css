@@ -24,7 +24,7 @@ body.active-modal {
   position: fixed;
 }
 
-.account-modal-content {
+.warning-modal-content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -44,11 +44,6 @@ body.active-modal {
   color: #3e3e3e;
   margin-bottom: 20px;
   margin-top: 0;
-}
-
-.account-modal-content-name {
-  font-size: 40px;
-  font-weight: 700;
 }
 
 .account-modal-content-text {
@@ -100,21 +95,38 @@ body.active-modal {
   color: #3e3e3e;
 }
 
-.account-modal-content-footer-element {
+.warning-modal-content-footer-element-yes {
   cursor: pointer;
+  width: 60px;
+  border-radius: 10px;
+  font-size: 24px;
 }
 
+.warning-modal-content-footer-element-no {
+  cursor: pointer;
+  width: 60px;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+.warning-modal-content-footer-element-yes:hover {
+  background-color: greenyellow;
+}
+
+.warning-modal-content-footer-element-no:hover {
+  background-color: red;
+}
 a {
   color: #3e3e3e;
 }
 
 @media (min-width: 1440px) {
-  .account-modal-content {
+  .warning-modal-content {
     display: flex;
     flex-direction: column;
     max-width: 800px;
     min-width: 500px;
-    height: 350px;
+    height: 125px;
     justify-content: space-between;
   }
 

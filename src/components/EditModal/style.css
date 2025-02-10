@@ -24,7 +24,7 @@ body.active-modal {
   position: fixed;
 }
 
-.account-modal-content {
+.edit-modal-content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -38,7 +38,7 @@ body.active-modal {
   text-align: center;
 }
 
-.account-modal-content-title {
+.edit-modal-content-title {
   font-size: 20px;
   font-weight: 400;
   color: #3e3e3e;
@@ -46,9 +46,9 @@ body.active-modal {
   margin-top: 0;
 }
 
-.account-modal-content-name {
-  font-size: 40px;
-  font-weight: 700;
+.edit-modal-content-main {
+  display: flex;
+  flex-direction: column;
 }
 
 .account-modal-content-text {
@@ -91,7 +91,7 @@ body.active-modal {
   color: rgb(118, 118, 118);
 }
 
-.account-modal-content-footer {
+.edit-modal-content-footer {
   display: flex;
   justify-content: center;
   font-size: 12px;
@@ -100,25 +100,68 @@ body.active-modal {
   color: #3e3e3e;
 }
 
-.account-modal-content-footer-element {
+.warning-modal-content-footer-element-yes {
   cursor: pointer;
+  width: 80px;
+  border-radius: 10px;
+  font-size: 24px;
 }
 
+.warning-modal-content-footer-element-no {
+  cursor: pointer;
+  width: 100px;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+.edit-modal-content-main {
+  gap: 16px;
+}
+
+.edit-modal-content-main input::placeholder {
+  color: #6d6d6d;
+}
+
+.edit-modal-content-main label {
+  font-size: 20px;
+}
+
+.edit-modal-content-main input {
+  height: 20px;
+}
+
+.warning-modal-content-footer-element-yes:hover {
+  background-color: greenyellow;
+}
+
+.warning-modal-content-footer-element-no:hover {
+  background-color: red;
+}
 a {
   color: #3e3e3e;
 }
 
 @media (min-width: 1440px) {
-  .account-modal-content {
+  .edit-modal-content {
     display: flex;
     flex-direction: column;
     max-width: 800px;
     min-width: 500px;
-    height: 350px;
+    height: 600px;
     justify-content: space-between;
   }
 
-  .account-modal-content-title {
+  .edit-modal-content-main input {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 24px;
+    height: 32px;
+  }
+
+  /* .edit-modal-content-main {
+    height: 28px;
+  } */
+
+  .edit-modal-content-title {
     font-size: 28px;
   }
 
@@ -136,7 +179,7 @@ a {
     font-size: 24px;
   }
 
-  .account-modal-content-footer {
+  .edit-modal-content-footer {
     font-size: 20px;
   }
 }

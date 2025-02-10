@@ -9,13 +9,67 @@
 }
 
 .shop-card-title {
+  display: flex;
+  flex-direction: row;
   font-weight: 700;
   font-size: 28px;
   color: black;
   width: fit-content;
 }
 
-.shop-card-title:hover {
+.shop-card-title-main {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.shop-card-dots {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.shop-cards-product-window {
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+  height: 75px;
+  background-color: white;
+  position: absolute;
+  right: 30px;
+  top: 70px;
+  border-radius: 20px;
+  font-size: 18px;
+  padding-top: 10px;
+  padding-left: 10px;
+  gap: 10px;
+}
+
+.shop-cards-product-window-edit:hover {
+  color: rgb(155, 135, 135);
+  cursor: pointer;
+}
+
+.shop-cards-product-window-edit {
+  width: fit-content;
+}
+
+.shop-cards-product-window-delete {
+  width: fit-content;
+}
+
+.shop-cards-product-window-delete:hover {
+  color: rgb(255, 0, 0);
+  cursor: pointer;
+}
+
+.shop-card-dots:hover {
+  background-color: rgb(129, 131, 135);
+}
+
+.shop-card-t:hover {
   color: blue;
 }
 

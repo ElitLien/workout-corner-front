@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import "./style.css";
 import GoodsList from "../GoodsList";
 import { ModalContext } from "../../App";
-import { cardsInfo } from "../../const/cardsInfo";
 import { videos } from "../../const/videos";
 import VideosList from "../VideosList";
 import axios from "axios";
@@ -23,11 +22,13 @@ interface FilterVideos {
   setDbFilteredGoods?: React.Dispatch<
     React.SetStateAction<IDbStorage[] | undefined>
   >;
+  navSwitch?: boolean;
 }
 
 const Navbar: React.FC<FilterVideos> = ({
   setFilteredVideos,
   setDbFilteredGoods,
+  navSwitch,
 }) => {
   const logo =
     "https://workout-corner.s3.eu-north-1.amazonaws.com/homepage/Frame.png";
@@ -44,6 +45,9 @@ const Navbar: React.FC<FilterVideos> = ({
   const [enableInput, setEnableInput] = useState<boolean>(false);
   const [focusHander, setFocusHandler] = useState<boolean>(false);
   const [dbStorage, setDbStorage] = useState<IDbStorage[]>();
+  const tokenStorage = localStorage.getItem("decodeTokenData");
+  const parseToken = tokenStorage && JSON.parse(tokenStorage);
+  const [decodeToken, setDecodeToken] = useState<any>(parseToken);
   const timeoutIDRef = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -189,6 +193,9 @@ const Navbar: React.FC<FilterVideos> = ({
     axios
       .get("http://localhost:8080/api/products/all")
       .then((res) => setDbStorage(res.data));
+    const localToken = localStorage.getItem("decodeTokenData");
+    localToken && setDecodeToken(JSON.parse(localToken));
+    console.log("navSwitch: ", navSwitch);
   }, []);
 
   return (
@@ -273,8 +280,18 @@ const Navbar: React.FC<FilterVideos> = ({
           Contact
           {location.pathname === "/contact" && <hr className="line"></hr>}
         </Link>
+        {decodeToken?.role === "ADMIN" && !navSwitch && (
+          <Link
+            to="/users"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
+            Users
+          </Link>
+        )}
         <div onClick={() => switchHandler()} style={{ cursor: "pointer" }}>
-          {localStorage.getItem("authToken") ? "Signed" : "Account"}
+          {decodeToken && !navSwitch ? decodeToken.username : "Account"}
         </div>
         <Link
           to="/cart"
