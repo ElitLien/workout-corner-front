@@ -67,7 +67,7 @@ const EditModal: React.FC<IEditModal> = ({
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/products/edit/${selectProductId}`,
+        `${process.env.REACT_APP_API_URL}/api/products/edit/${selectProductId}`,
         formData,
         {
           headers: {
@@ -77,6 +77,7 @@ const EditModal: React.FC<IEditModal> = ({
           },
         }
       );
+      window.alert("Product has update!");
       console.log("Product created successfully:", response.data);
     } catch (error) {
       console.error("Error creating product:", error);

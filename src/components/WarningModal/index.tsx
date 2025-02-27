@@ -23,7 +23,7 @@ const WarningModal: React.FC<IWarningModal> = ({
     try {
       setLoading(true);
       axios.post(
-        `http://localhost:8080/api/products/delete/${selectProductId}`,
+        `${process.env.REACT_APP_API_URL}/api/products/delete/${selectProductId}`,
         {},
         {
           headers: {

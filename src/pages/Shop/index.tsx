@@ -53,14 +53,17 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:8080/api/products/filter`, {
-        params: {
-          min: paramPrice?.min || "",
-          max: paramPrice?.max || "",
-          categoryId: selectedCategory || "",
-          sortBy: sortData || "",
-        },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/products/filter`,
+        {
+          params: {
+            min: paramPrice?.min || "",
+            max: paramPrice?.max || "",
+            categoryId: selectedCategory || "",
+            sortBy: sortData || "",
+          },
+        }
+      );
       setDbFilteredGoods(res.data);
       if (!res) return;
     } catch (error) {
@@ -85,7 +88,9 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
   const resetFilters = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:8080/api/products/all`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/products/all`
+      );
       setDbFilteredGoods(res.data);
       setLoading(false);
     } catch {
@@ -99,7 +104,9 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
 
   const catchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/categories/all");
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/categories/all`
+      );
       setDbCategories(res.data);
     } catch {
       console.log("Don't load categories!!!");
@@ -109,7 +116,9 @@ const Shop: React.FC<IShop> = ({ setShopId }) => {
   const fetchAllData = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:8080/api/products/all`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/products/all`
+      );
       setDbFilteredGoods(res.data);
     } catch (error) {
       console.error("Error fetching data: ", error);

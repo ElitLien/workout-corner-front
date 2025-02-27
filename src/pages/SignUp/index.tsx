@@ -32,7 +32,7 @@ const SignUp = () => {
       role: null,
     };
     axios
-      .post("http://localhost:8080/api/auth/register", userObj, {
+      .post(`${process.env.REACT_APP_API_URL}/api/auth/register`, userObj, {
         headers: {
           "Content-Type": "application/json",
         },

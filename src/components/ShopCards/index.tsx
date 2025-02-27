@@ -50,7 +50,7 @@ const ShopCards: React.FC<IShop> = ({
 
   //   try {
   //     const response = await axios.post(
-  //       "http://localhost:8080/api/products/create",
+  //       `${process.env.REACT_APP_API_URL}/api/products/create`,
   //       formData,
   //       {
   //         headers: {
@@ -92,7 +92,7 @@ const ShopCards: React.FC<IShop> = ({
 
   //   try {
   //     const response = await axios.post(
-  //       "http://localhost:8080/api/products/edit/11",
+  //       `${process.env.REACT_APP_API_URL}/api/products/edit/11`,
   //       formData,
   //       {
   //         headers: {

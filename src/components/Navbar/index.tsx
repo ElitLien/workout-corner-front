@@ -191,7 +191,7 @@ const Navbar: React.FC<FilterVideos> = ({
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/products/all")
+      .get(`${process.env.REACT_APP_API_URL}/api/products/all`)
       .then((res) => setDbStorage(res.data));
     const localToken = localStorage.getItem("decodeTokenData");
     localToken && setDecodeToken(JSON.parse(localToken));

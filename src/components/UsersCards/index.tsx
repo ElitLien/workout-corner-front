@@ -18,12 +18,15 @@ const UsersCards = () => {
 
   const loadUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/users/all", {
-        headers: {
-          Accept: "*/*",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/users/all`,
+        {
+          headers: {
+            Accept: "*/*",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setUsers(res.data);
     } catch (error) {
       console.error("Error fetching data: ", error);
@@ -33,7 +36,7 @@ const UsersCards = () => {
   const changeRole = async (name: string) => {
     try {
       await axios.post(
-        "http://localhost:8080/api/users/role",
+        `${process.env.REACT_APP_API_URL}/api/users/role`,
         {
           userId: activeChanger,
           role: `${selectedRole?.toUpperCase()}`,

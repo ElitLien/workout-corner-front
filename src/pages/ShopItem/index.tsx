@@ -90,7 +90,7 @@ const ShopItem: React.FC<IItemContent> = () => {
   const fetchData = async (id: number) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/products/${id}`
+        `${process.env.REACT_APP_API_URL}/api/products/${id}`
       );
       setItemContent(response.data);
     } catch {
@@ -118,7 +118,7 @@ const ShopItem: React.FC<IItemContent> = () => {
   const createReview = () => {
     try {
       axios.post(
-        "http://localhost:8080/api/reviews/create",
+        `${process.env.REACT_APP_API_URL}/api/reviews/create`,
         {
           userId: userId,
           productId: +location.pathname.split("/")[2],
@@ -140,12 +140,15 @@ const ShopItem: React.FC<IItemContent> = () => {
 
   const loadReviews = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/reviews/all", {
-        headers: {
-          Accept: "*/*",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/reviews/all`,
+        {
+          headers: {
+            Accept: "*/*",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const productReview = res.data.filter(
         (el: {
           id: number;

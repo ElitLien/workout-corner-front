@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./style.css";
 import { ModalContext } from "../../App";
 import { Link, useNavigate } from "react-router-dom";
@@ -34,12 +34,13 @@ const AccountModal = () => {
 
   const buttonHandler = () => {
     const userObj = {
-      username: username,
-      password: password,
+      username,
+      password,
     };
+    console.log("userObj: ", userObj);
 
     axios
-      .post("http://localhost:8080/api/auth/authenticate", userObj, {
+      .post(`${process.env.REACT_APP_API_URL}/api/auth/authenticate`, userObj, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -49,7 +50,7 @@ const AccountModal = () => {
         const receivedToken = response.data.token;
         localStorage.setItem("authToken", receivedToken);
 
-        return axios.get("http://localhost:8080/api/profile", {
+        return axios.get(`${process.env.REACT_APP_API_URL}/api/profile`, {
           headers: {
             Accept: "*/*",
             Authorization: `Bearer ${receivedToken}`,
@@ -68,6 +69,7 @@ const AccountModal = () => {
         window.location.reload();
       })
       .catch((error) => {
+        window.alert("Incorect data!!!");
         console.error("Error:", error.response || error.message);
       });
   };
@@ -75,7 +77,7 @@ const AccountModal = () => {
   const logoutHandler = () => {
     axios
       .post(
-        "http://localhost:8080/api/auth/logout",
+        `${process.env.REACT_APP_API_URL}/api/auth/logout`,
         {},
         {
           headers: {
@@ -98,16 +100,6 @@ const AccountModal = () => {
   useEffect(() => {
     const localToken = localStorage.getItem("decodeTokenData");
     localToken && setDecodeToken(JSON.parse(localToken));
-
-    const handleKeyDown = (e: any) => {
-      e.key === "Enter" && buttonHandler();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.addEventListener("keydown", handleKeyDown);
-    };
   }, []);
 
   return (
@@ -118,26 +110,30 @@ const AccountModal = () => {
           <h3 className="account-modal-content-title">
             Welcome to WorkoutCorner
           </h3>
-          <div className="account-modal-content-inputs">
-            <input
-              className="account-modal-content-input"
-              type="text"
-              placeholder="Username"
-              onChange={nameHandler}
-            />
-            <input
-              className="account-modal-content-input"
-              type="password"
-              placeholder="Password"
-              onChange={passwordHandler}
-            />
-          </div>
-          <button
-            className="account-modal-content-button"
-            onClick={buttonHandler}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              buttonHandler();
+            }}
           >
-            Sign in
-          </button>
+            <div className="account-modal-content-inputs">
+              <input
+                className="account-modal-content-input"
+                type="text"
+                placeholder="Username"
+                onChange={nameHandler}
+              />
+              <input
+                className="account-modal-content-input"
+                type="password"
+                placeholder="Password"
+                onChange={passwordHandler}
+              />
+            </div>
+            <button className="account-modal-content-button" type="submit">
+              Sign in
+            </button>
+          </form>
           <div className="account-modal-content-footer">
             <div className="account-modal-content-footer-element">
               Forgot Password?

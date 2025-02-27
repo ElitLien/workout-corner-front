@@ -36,7 +36,7 @@ const GoodsList: React.FC<IGoodsList> = ({
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/products/all")
+      .get(`${process.env.REACT_APP_API_URL}/api/products/all`)
       .then((res) => setDbStorage(res.data));
   }, []);
 
