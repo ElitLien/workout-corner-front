@@ -1,6 +1,6 @@
 {
   "homepage": "https://elitlien.github.io/workout-corner-front/",
-  "name": "workout-corner-front",
+  "name": "workout-corner",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",
