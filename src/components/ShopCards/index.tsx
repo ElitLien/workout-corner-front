@@ -119,7 +119,7 @@ const ShopCards: React.FC<IShop> = ({
           const isActive = activeProductId === el.id;
           return (
             <div key={ind} className="shop-card">
-              <Link to={`/shop/${el.id}`}>
+              <Link to={`/workout-corner-front/shop/${el.id}`}>
                 <div className="shop-card-image">
                   <img src={`data:image/jpeg;base64,${el.image}`} alt="" />
                 </div>
@@ -129,7 +129,10 @@ const ShopCards: React.FC<IShop> = ({
                   className="shop-card-title"
                   onClick={() => setShopId(el.id)}
                 >
-                  <Link to={`/shop/${el.id}`} className="shop-card-t">
+                  <Link
+                    to={`/workout-corner-front/shop/${el.id}`}
+                    className="shop-card-t"
+                  >
                     {el.name}
                   </Link>
                   {decodeToken?.role === "MODERATOR" ||

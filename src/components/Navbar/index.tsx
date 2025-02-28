@@ -201,14 +201,15 @@ const Navbar: React.FC<FilterVideos> = ({
   return (
     <div className="navbar">
       <Link
-        to="/"
+        to="/workout-corner-front"
         onClick={() => {
           window.scrollTo(0, 0);
         }}
       >
         <img src={logo} alt="" />
       </Link>
-      {location.pathname === "/shop" || location.pathname === "/videos" ? (
+      {location.pathname === "/workout-corner-front/shop" ||
+      location.pathname === "/workout-corner-front/videos" ? (
         <div className="navbar-inp">
           <input
             className="navbar-input"
@@ -228,26 +229,30 @@ const Navbar: React.FC<FilterVideos> = ({
           )}
           {focusHander && (
             <div className="navbar-list">
-              {location.pathname === "/shop" && inputValue && enableInput && (
-                <GoodsList
-                  searchResult={searchResult}
-                  setDbFilteredGoods={setDbFilteredGoods}
-                  setFocusHandler={setFocusHandler}
-                  timeoutIDRef={timeoutIDRef}
-                  inputRef={inputRef}
-                  setInputValue={setInputValue}
-                />
-              )}
-              {location.pathname === "/videos" && inputValue && enableInput && (
-                <VideosList
-                  videosResult={videosResult}
-                  setFilteredVideos={setFilteredVideos}
-                  setFocusHandler={setFocusHandler}
-                  timeoutIDRef={timeoutIDRef}
-                  inputRef={inputRef}
-                  setInputValue={setInputValue}
-                />
-              )}
+              {location.pathname === "/workout-corner-front/shop" &&
+                inputValue &&
+                enableInput && (
+                  <GoodsList
+                    searchResult={searchResult}
+                    setDbFilteredGoods={setDbFilteredGoods}
+                    setFocusHandler={setFocusHandler}
+                    timeoutIDRef={timeoutIDRef}
+                    inputRef={inputRef}
+                    setInputValue={setInputValue}
+                  />
+                )}
+              {location.pathname === "/workout-corner-front/videos" &&
+                inputValue &&
+                enableInput && (
+                  <VideosList
+                    videosResult={videosResult}
+                    setFilteredVideos={setFilteredVideos}
+                    setFocusHandler={setFocusHandler}
+                    timeoutIDRef={timeoutIDRef}
+                    inputRef={inputRef}
+                    setInputValue={setInputValue}
+                  />
+                )}
             </div>
           )}
         </div>
@@ -256,33 +261,41 @@ const Navbar: React.FC<FilterVideos> = ({
       )}
       <div className="navbar-pages">
         <Link
-          to="/shop"
+          to="/workout-corner-front/shop"
           onClick={() => {
             window.scrollTo(0, 0);
           }}
         >
-          Shop{location.pathname === "/shop" && <hr className="line"></hr>}
+          Shop
+          {location.pathname === "/workout-corner-front/shop" && (
+            <hr className="line"></hr>
+          )}
         </Link>
         <Link
-          to="/videos"
+          to="/workout-corner-front/videos"
           onClick={() => {
             window.scrollTo(0, 0);
           }}
         >
-          Videos{location.pathname === "/videos" && <hr className="line"></hr>}
+          Videos
+          {location.pathname === "/workout-corner-front/videos" && (
+            <hr className="line"></hr>
+          )}
         </Link>
         <Link
-          to="/contact"
+          to="/workout-corner-front/contact"
           onClick={() => {
             window.scrollTo(0, 0);
           }}
         >
           Contact
-          {location.pathname === "/contact" && <hr className="line"></hr>}
+          {location.pathname === "/workout-corner-front/contact" && (
+            <hr className="line"></hr>
+          )}
         </Link>
         {decodeToken?.role === "ADMIN" && !navSwitch && (
           <Link
-            to="/users"
+            to="/workout-corner-front/users"
             onClick={() => {
               window.scrollTo(0, 0);
             }}
@@ -294,13 +307,15 @@ const Navbar: React.FC<FilterVideos> = ({
           {decodeToken && !navSwitch ? decodeToken.username : "Account"}
         </div>
         <Link
-          to="/cart"
+          to="/workout-corner-front/cart"
           onClick={() => {
             window.scrollTo(0, 0);
           }}
         >
           Cart{`(${count})`}
-          {location.pathname === "/cart" && <hr className="line"></hr>}
+          {location.pathname === "/workout-corner-front/cart" && (
+            <hr className="line"></hr>
+          )}
         </Link>
       </div>
     </div>

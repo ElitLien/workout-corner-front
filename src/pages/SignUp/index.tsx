@@ -78,7 +78,7 @@ const SignUp = () => {
             onChange={passwordHandler}
           />
           <button onClick={buttonHandler}>Sign Up</button>
-          <Link to="/">Return to homepage</Link>
+          <Link to="/workout-corner-front">Return to homepage</Link>
         </div>
         <div className="sign-up-footer">WorkoutCorner 2024</div>
       </div>

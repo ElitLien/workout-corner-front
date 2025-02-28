@@ -64,7 +64,7 @@ const AccountModal = () => {
         console.log("resToken: ", resToken);
         setDecodeToken(resToken);
         console.log("Decoded Token Data: ", response.data);
-        navigate("/");
+        navigate("/workout-corner-front");
         switchHandler();
         window.location.reload();
       })

@@ -100,7 +100,7 @@ const ShopItem: React.FC<IItemContent> = () => {
 
   const addItemToStorage = () => {
     if (isInCart) {
-      navigate("/cart");
+      navigate("/workout-corner-front/cart");
     } else {
       const parse =
         (localStorage.getItem("itemContent") &&
@@ -320,7 +320,7 @@ const ShopItem: React.FC<IItemContent> = () => {
             </div>
           </div>
           <div className="shop-item-tabs">
-            <Link to="/shop">Shop</Link>
+            <Link to="/workout-corner-front/shop">Shop</Link>
             {">"}
             <p className="shop-item-tabs-current">{itemContent?.name}</p>
           </div>
