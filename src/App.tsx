@@ -48,19 +48,22 @@ function App() {
     <ModalContext.Provider value={{ modal, switchHandler }}>
       <Router>
         <Routes>
-          <Route path="" element={<Homepage />} />
-          <Route path="/shop" element={<Shop setShopId={setShopId} />} />
+          <Route path="/workout-corner-front" element={<Homepage />} />
           <Route
-            path={`/shop/:${shopId}`}
+            path="/workout-corner-front/shop"
+            element={<Shop setShopId={setShopId} />}
+          />
+          <Route
+            path={`/workout-corner-front/shop/:${shopId}`}
             element={<ShopItem setCartItem={setCartItem} />}
           />
-          <Route path="/videos" element={<Videos />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/workout-corner-front/videos" element={<Videos />} />
+          <Route path="/workout-corner-front/contact" element={<Contact />} />
           {decodeToken?.role === "ADMIN" && (
-            <Route path="/users" element={<Users />} />
+            <Route path="/workout-corner-front/users" element={<Users />} />
           )}
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/workout-corner-front/cart" element={<Cart />} />
+          <Route path="/workout-corner-front/signup" element={<SignUp />} />
         </Routes>
       </Router>
     </ModalContext.Provider>
