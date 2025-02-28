@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/workout-corner-front/static/css/main.4edbdfa9.css",
+    "main.js": "/workout-corner-front/static/js/main.7e31b03a.js",
+    "static/js/453.d3e57d55.chunk.js": "/workout-corner-front/static/js/453.d3e57d55.chunk.js",
+    "static/media/hero_img2.png": "/workout-corner-front/static/media/hero_img2.c9496f3096fe9f614325.png",
+    "static/media/basketball.png": "/workout-corner-front/static/media/basketball.55c9af1bf099e0faed36.png",
+    "static/media/exercise.png": "/workout-corner-front/static/media/exercise.8823086c60386e6afc56.png",
+    "static/media/thumbs-up.png": "/workout-corner-front/static/media/thumbs-up.0e3136d89c515c576028.png",
+    "index.html": "/workout-corner-front/index.html",
+    "main.4edbdfa9.css.map": "/workout-corner-front/static/css/main.4edbdfa9.css.map",
+    "main.7e31b03a.js.map": "/workout-corner-front/static/js/main.7e31b03a.js.map",
+    "453.d3e57d55.chunk.js.map": "/workout-corner-front/static/js/453.d3e57d55.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4edbdfa9.css",
+    "static/js/main.7e31b03a.js"
+  ]
+}
